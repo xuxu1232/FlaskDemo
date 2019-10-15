@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}
+    请假条
+{% endblock %}
+
+{% block label %}
+{% endblock %}
+
+{% block content %}
+<form action="">
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="4" style="font-weight:bold;font-size: 70px;text-align: center;">请假条</td>
+            </tr>
+            <tr id="num">
+                <td colspan="4" style="font-weight:bold;font-size: 30px;text-align: center;">第<span>{{ leave.id }}</span>个请假条</td>
+            </tr>
+            <tr>
+                <th style="text-align: center;">请假人姓名</th>
+                <td>{{ leave.leave_name }}</td>
+                <th style="text-align: center;">请假类型</th>
+                <td>{{ leave.leave_type }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: center;">开始时间</th>
+                <td>{{ leave.leave_start }}</td>
+                <th style="text-align: center;">结束时间</th>
+                <td>{{ leave.leave_end }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: center;">联系方式</th>
+                <td>{{ leave.leave_phone }}</td>
+                <th style="text-align: center;">请假天数</th>
+                <td>{{ leave.leave_days }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: center; line-height: 120px;">描述</th>
+                <td colspan="3">{{ leave.leave_description }}</td>
+            </tr>
+            <tr>
+                <td colspan="4" id="btn">
+                    <input type="button" value="通过" class="btn btn-success btn-user btn-block">
+                    <input type="button" value="销假" class="btn btn-warning btn-user btn-block">
+                    <input type="button" value="驳回" class="btn btn-danger btn-user btn-block">
+                </td>
+
+            </tr>
+        </table>
+</form>
+
+{% endblock %}
+
+{% block script %}
+    <script>
+        $("#btn").children().each(
+            function () {
+
+                $(this).click(
+                    function () {
+                        $('.btn').attr('disabled',true)
+                        $(this).attr('disabled',false)
+                        text = $(this).val()
+                        leave_id = $(this).parents('tr').siblings('#num').find('td').find('span').text()
+                        url = '/check_leave/?result='+text+'&leave_id='+leave_id
+                        $.ajax(
+                            {
+                                url:url,
+                                type:'get',
+                                data:'',
+                                success:function (data) {
+                                    console.log(data)
+                                },
+                                error:function (error) {
+                                    console.log(error)
+                                }
+                            }
+                        )
+                    }
+                )
+            }
+        )
+    </script>
+{% endblock %}

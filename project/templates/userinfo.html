@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block title %}
+    个人中心
+{% endblock %}
+
+{% block label %}
+    个人中心
+{% endblock %}
+
+{% block content %}
+       <!-- Content Row -->
+    <div class="row">
+
+            <div class="col-xl-12 col-lg-7">
+
+              <!-- Area Chart -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">个人详情</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <td rowspan="3"  style="width:300px;"><img src="/static/{{ user.photo }}" alt="" style="width: 80%"></td>
+                            <th>姓名</th>
+                            <td>{{ user.name }}</td>
+                            <th>性别</th>
+                            <td>{% if user.sex == 1 %}男{% elif user.sex == 0 %}女{% else %}*{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>年龄</th>
+                            <td>{% if user.age %}{{ user.age }}{% else %}*{% endif %}</td>
+                            <th>身份</th>
+                            <td>{% if user.identity %}{{ user.identity }}{% else %}*{% endif %}</td>
+                        </tr>
+                        <tr>
+                            <th>电话</th>
+                            <td>{% if user.phone %}{{ user.phone }}{% else %}*{% endif %}</td>
+                            <th>阶段</th>
+                            <td>{% if user.term %}{{ user.term }}{% else %}*{% endif %}</td>
+                        </tr>
+
+                    </table>
+                    <a href="/update/userinfo/"><h6 class="m-0 font-weight-bold text-primary float-right">完善信息</h6></a>
+                </div>
+              </div>
+
+              <!-- Bar Chart -->
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">课程表</h6>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>星期一</th>
+                            <th>星期二</th>
+                            <th>星期三</th>
+                            <th>星期四</th>
+                            <th>星期五</th>
+                            <th>星期六</th>
+                            <th>星期日</th>
+                        </tr>
+                        {% for one in result %}
+                        <tr>
+                            {% for day in one %}
+                                {% if day != 'empty' %}
+                                    <td>{{ day }}</td>
+                                    {% else %}
+                                    <td></td>
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                    </table>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+{% endblock %}

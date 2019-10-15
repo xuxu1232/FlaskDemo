@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}
+    请假条
+{% endblock %}
+
+{% block label %}
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+
+        <table class="table table-bordered">
+            <tr>
+                <td colspan="4" style="font-weight:bold;font-size: 70px;text-align: center;">请假条</td>
+            </tr>
+
+            <tr>
+                <th style="text-align: center;">请假人姓名</th>
+                <td><input type="text" name="username" placeholder="请输入姓名" class="form-control form-control-user"></td>
+                <th style="text-align: center;">请假类型</th>
+                <td>
+                    <select name="type" id="" class="form-control form-control-user">
+                        <option value="事假">事假</option>
+                        <option value="病假">病假</option>
+                        <option value="婚假">婚假</option>
+                        <option value="产假">产假</option>
+                        <option value="缺勤">缺勤</option>
+                        <option value="其他">其他</option>
+                        <option value="加班">加班</option>
+                        <option value="出差">出差</option>
+                        <option value="调休">调休</option>
+
+                    </select>
+
+                </td>
+            </tr>
+            <tr>
+                <th style="text-align: center;">开始时间</th>
+                <td><input type="date" name="starttime" class="form-control form-control-user"></td>
+                <th style="text-align: center;">结束时间</th>
+                <td><input type="date" name="endtime" class="form-control form-control-user"></td>
+            </tr>
+            <tr>
+                <th style="text-align: center;">联系方式</th>
+                <td><input type="text" name="phone" class="form-control form-control-user"></td>
+                <th style="text-align: center;">请假天数</th>
+                <td><input type="number" name="days" class="form-control form-control-user"></td>
+            </tr>
+            <tr>
+                <th style="text-align: center; line-height: 120px;">描述</th>
+                <td colspan="3"><textarea name="description" class="form-control form-control-user" rows="5"></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="submit" value="提交" class="btn btn-primary btn-user btn-block"></td>
+
+            </tr>
+        </table>
+
+    </form>
+
+{% endblock %}

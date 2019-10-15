@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+{% block title %}
+    请假记录
+{% endblock %}
+
+{% block label %}
+    请假记录
+    <a href="/leave_list/" class="btn btn-primary" style="float: right;">请假条</a>
+
+{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered">
+    <tr>
+        <td>请假编号</td>
+        <td>请假人</td>
+        <td>请假类型</td>
+        <td>开始时间</td>
+        <td>结束原因</td>
+        <td>请假状态</td>
+        <td>操作</td>
+    </tr>
+    {% for one in leave %}
+        {% if one.leave_name %}
+    <tr>
+
+            <td>{{ one.id }}</td>
+            <td>{{ one.leave_name }}</td>
+            <td>{{ one.leave_type }}</td>
+            <td>{{ one.leave_start }}</td>
+            <td>{{ one.leave_end }}</td>
+            {% if one.leave_status == 0 %}
+                <td>审核中</td>
+            {% elif one.leave_status == 1 %}
+                <td>通过</td>
+            {% elif one.leave_status == 2 %}
+                <td>驳回</td>
+            {% elif one.leave_status == 3 %}
+                <td>销假</td>
+            {% endif %}
+            <td><a href="/leave_detail/?id={{ one.id }}"><button class="btn btn-danger" >审核</button></a></td>
+
+    </tr>
+        {% endif %}
+     {% endfor %}
+    </table>
+{% endblock %}
